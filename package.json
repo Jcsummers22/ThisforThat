@@ -1,5 +1,5 @@
 {
-  "name": "thisforthat",
+  "name": "'",
   "version": "1.0.0",
   "description": "An app to trade goods and services!",
   "main": "server.js",
@@ -37,5 +37,6 @@
   "bugs": {
     "url": "https://github.com/Jcsummers22/ThisforThat/issues"
   },
-  "homepage": "https://github.com/Jcsummers22/ThisforThat#readme"
+  "homepage": "https://github.com/Jcsummers22/ThisforThat#readme",
+  "devDependencies": {}
 }
