@@ -85,7 +85,8 @@ var Buyer = sequelize.define("Buyer", {
 Buyer.sync();
 
 
-// Makes the Book Model available for other files (will also create a table)
+// Makes the Item, Owner, and Buyer Models available for other files.
+// This will also create a table when server.js is run.
 module.exports = {
   Item: Item,
   Owner: Owner,
