@@ -9,16 +9,20 @@ var db = require("../models");
 // ===================
 module.exports = function(app) {
 
-	// GET route
+	// GET routes
+	//====================================================
+	// Get the index.handlebars page when localhost is accessed
 	app.get("/", function(req, res) {
-	  db.Item.findAll({}).then(function(data) {
-	    var hbsObject = {
-	       Item: data
-	    };
-	    console.log(hbsObject);
-	    res.render("index", hbsObject);
-	  });
+	    res.render("index");
 	});
+
+	// Show us (Get) everything in table items when this route is accessed
+  app.get("/api/items", function(req, res) {
+    db.Item.findAll({}).then(function(dbItem) {
+      res.json(dbItem);
+    });
+  });
+
 
 };
 
