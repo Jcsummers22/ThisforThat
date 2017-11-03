@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     owner_id: {
       type: DataTypes.INTEGER
     },
-    catergory: {
+    category: {
       type: DataTypes.STRING
     },
     // two options: sale or trade
@@ -35,7 +35,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER
     }
   }, {
-    timestamps: true
+    timestamps: false
   });
 
   return Item;
