@@ -10,7 +10,7 @@ var PORT = process.env.PORT || 3000;
  
 
 //static content
-app.use(express.static(process.cwd() + '/public'));
+app.use(express.static('/public'));
 
 // require everything in the models folder
 var db = require("./models/");
@@ -24,17 +24,15 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 //override with POST command
 app.use(methodOverride('_method')); 
 
-// Sets default layout for handlebars to "main"
+// Sets Handlebars as the default templating engine.
 app.engine('handlebars', exphbs({
 	defaultLayout: 'main'
 })); 
 
-// Looks for .handlebars extension
 app.set('view engine', 'handlebars'); 
 
 // The routes
-// var routes = require('./controllers/swap_controller.js'); 
-// app.use('/', routes); 
+require("./routes/item-api-routes.js")(app);
 
 // Starts our Express server
 db.sequelize.sync({ force: true }).then(function() {
