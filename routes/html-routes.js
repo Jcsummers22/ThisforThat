@@ -20,4 +20,9 @@ module.exports = function(app) {
 		res.render("userView");
 	});
 
+	// Get the manageView.handelbars page
+	app.get("/manageView", function(req, res) {
+		res.render("manageView");
+	});
+
 };
