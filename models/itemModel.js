@@ -47,10 +47,9 @@ module.exports = function(sequelize, DataTypes) {
     // This is targetting the primary key in the User model.
     // The primary key in User is "user_id"
     Item.belongsTo(models.User, {
-      foreignKey: {
-        foreignKey: "owner_id",
-        allowNull: false
-      }
+      foreignKey: "owner_id",   // adds "owner_id" to Item model
+      targetKey: "user_id",     // referencing "user_id" in User model
+      allowNull: false
     });
   };
 
