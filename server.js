@@ -10,7 +10,7 @@ var PORT = process.env.PORT || 3000;
  
 
 //static content
-app.use(express.static('/public'));
+app.use(express.static('./public'));
 
 // require everything in the models folder
 var db = require("./models/");
