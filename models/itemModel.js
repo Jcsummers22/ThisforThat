@@ -1,14 +1,17 @@
-// creating Buyer model
-// Exporting makes the Buyer Model available for other files.
+// creating Item model
+// Exporting makes the Item Model available for other files.
 // This will also create a table when server.js is run.
 module.exports = function(sequelize, DataTypes) {
   var Item = sequelize.define("Item", {
+    item_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true
+    },
     item_name: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    owner_id: {
-      type: DataTypes.INTEGER
     },
     category: {
       type: DataTypes.STRING
@@ -37,6 +40,20 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     timestamps: false
   });
+
+  Item.associate = function(models) {
+    // We're saying that an Item should belong to a User
+    // An Item can't be created without a User due to the foreign key constraint
+    // This is targetting the primary key in the User model.
+    // The primary key in User is "user_id"
+    Item.belongsTo(models.User, {
+      foreignKey: {
+        foreignKey: "owner_id",
+        allowNull: false
+      }
+    });
+  };
+
 
   return Item;
 }
