@@ -7,7 +7,7 @@ $(document).ready(function(){
       $('.modal').modal();
         dismissible: true;
         closeIcon: true
-        $('.close').closeModal();
+        $('.close').modal('close');
     });
   
     $(".learnMore").click(function() {

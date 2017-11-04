@@ -33,7 +33,9 @@ app.set('view engine', 'handlebars');
 
 // The routes
 require("./routes/item-api-routes.js")(app);
+require("./routes/user-api-routes.js")(app);
 require("./routes/html-routes.js")(app);
+
 
 
 // Starts our Express server
