@@ -11,11 +11,6 @@ module.exports = function(app) {
 
 	// GET routes
 	//====================================================
-	// Get the index.handlebars page when localhost is accessed
-	app.get("/", function(req, res) {
-	    res.render("index");
-	});
-
 	// Show us (Get) everything in table items when this route is accessed
   app.get("/api/items", function(req, res) {
     db.Item.findAll({}).then(function(dbItem) {

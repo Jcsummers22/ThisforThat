@@ -1,0 +1,23 @@
+// This file provides routes for changing the html pages.
+
+
+// Requiring the models
+var db = require("../models");
+
+// The Routes
+// ===================
+module.exports = function(app) {
+
+	// GET routes
+	//====================================================
+	// Get the index.handlebars page when localhost is accessed
+	app.get("/", function(req, res) {
+	  res.render("index");
+	});
+
+	// Get the userView.handlebars page
+	app.get("/userView", function(req, res) {
+		res.render("userView");
+	});
+
+};
