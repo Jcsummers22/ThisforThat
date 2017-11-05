@@ -22,17 +22,19 @@ module.exports = function(app) {
 	// Add (Post) new user to the database
 	app.post("/api/newuser", function(req, res) {
 		console.log(req.body);
-		db.User.create([
-			"userName", "firstName", "lastName", "email", "zipcode", "password"
-		], [
-				req.body.user_name, req.body.first_name, req.body.last_name, req.body.email, req.body.zipcode, req.body.password
-		], function(result) {
+		db.User.create({
+			userName: 	req.body.userName,
+			firstName: 	req.body.firstName,
+			lastName: 	req.body.lastName,
+			email: 			req.body.email,
+			zipcode: 		req.body.zipcode,
+			password: 	req.body.password
+		}).then(function(result) {
 			res.json({ id: result.insertId });
+		}).catch(function(err) {
+			console.log(err);
 		});
 
 	});
-
-
-
 
 };
