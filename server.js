@@ -10,7 +10,7 @@ var PORT = process.env.PORT || 3000;
  
 
 //static content
-app.use(express.static('/public'));
+app.use(express.static('./public'));
 
 // require everything in the models folder
 var db = require("./models/");
@@ -33,6 +33,10 @@ app.set('view engine', 'handlebars');
 
 // The routes
 require("./routes/item-api-routes.js")(app);
+require("./routes/user-api-routes.js")(app);
+require("./routes/html-routes.js")(app);
+
+
 
 // Starts our Express server
 db.sequelize.sync({ force: true }).then(function() {
