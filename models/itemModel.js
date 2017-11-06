@@ -36,9 +36,17 @@ module.exports = function(sequelize, DataTypes) {
     },
     buyer_id: {
       type: DataTypes.INTEGER
+    },
+    created_at: {
+      type: DataTypes.DATE,
+      default: 'YYYY-MM-DD HH:mm:SS',
+      allowNull: false
+    },
+    updated_at: {
+      type: DataTypes.DATE,
     }
   }, {
-    timestamps: false
+    timestamps: true
   });
 
   Item.associate = function(models) {
