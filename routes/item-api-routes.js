@@ -17,13 +17,23 @@ module.exports = function(app) {
 	//});
 
 	// Show us (Get) everything in table items when this route is accessed
-  app.get("/api/items", function(req, res) {
+  app.get("/api/all", function(req, res) {
     db.Item.findAll({}).then(function(dbItem) {
       res.json(dbItem);
     });
 	});
+
+  app.get("/api/items", function (req, res) {
+	  db.Item.findAll({
+		  where:{
+			  item_name: req.body.item_name
+		  }
+	  }).then(function (dbItem) {
+		  res.json(dbItem);
+	  });
+  });
 	
-	app.get("/api/cash/", function (req, res) {
+	app.get("/api/category/:category", function (req, res) {
 		db.Item.findAll({
 			where:{
 				for_cash: true
@@ -72,10 +82,13 @@ module.exports = function(app) {
 
 	app.get("api/recent", function (req, res){
 		db.Item.findAll({
-			order: [
-				['created_at', 'DESC'],
-			]
+			limit: 5,
+			where:{
+
+			},
+			order: [['created_at', 'DESC']]
 		}).then(function(results){
+			console.log(results)
 			res.json(results);
 		});
 	});
@@ -98,6 +111,30 @@ module.exports = function(app) {
 		console.log(err);
 	});
 });
+
+	// DELETE route for deleting posts
+	app.delete("/api/posts/:id", function (req, res) {
+		db.Post.destroy({
+			where: {
+				id: req.params.id
+			}
+		})
+			.then(function (dbPost) {
+				res.json(dbPost);
+			});
+	});
+	// PUT route for updating posts
+	app.put("/api/posts", function (req, res) {
+		db.Post.update(req.body,
+			{
+				where: {
+					id: req.body.id
+				}
+			})
+			.then(function (dbPost) {
+				res.json(dbPost);
+			});
+	});
 	
 
 
