@@ -74,7 +74,6 @@ module.exports = function(app) {
 		db.Item.findAll({
 			order: [
 				['created_at', 'DESC'],
-				
 			]
 		}).then(function(results){
 			res.json(results);
@@ -94,10 +93,11 @@ module.exports = function(app) {
 			updated_at: req.body.updated_at
 		
 		}).then(function (dbPost) {
-				res.json(dbPost);
-			});
+			res.json({ id: result.insertId });
+		}).catch(function (err) {
+		console.log(err);
 	});
-
+});
 	
 
 
