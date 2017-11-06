@@ -4,6 +4,9 @@
 // Requiring the models
 var db = require("../models");
 
+// Requiring dependencies
+var passport = require('passport');
+
 // The Routes
 // ===================
 module.exports = function(app) {
@@ -17,7 +20,6 @@ module.exports = function(app) {
 			res.json(dbUser);
 		});
 	});
-
 
 	// Add (Post) new user to the database
 	app.post("/api/newuser", function(req, res) {
@@ -36,5 +38,16 @@ module.exports = function(app) {
 		});
 
 	});
+
+	// Authenticate user on login
+	app.post('/login', 
+	  passport.authenticate('local', {
+	  	successRedirect: '/userView',
+	  	failureRedirect: '/', 
+	  	failureFlash: true
+	  }));
+	
+
+
 
 };

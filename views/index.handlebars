@@ -118,7 +118,7 @@
       <button id="clearLogin" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
     <h4>Login to your account</h4>
     <p>You'll be swapping in minutes!</p>
-      <form>
+      <form action="/login" method="POST">
        <div class="row">
           <div class="input-field col s12">
             <input id="emailLogin" type="email" name="email-for-login" class="validate">
@@ -197,7 +197,7 @@
       password: $('#passwordLogin').val().trim()
     }
     var currentURL = window.location.origin;
-    $.post(currentURL + '/login', userInput, function(data) {
+    $.post(currentURL + '/userView', userInput, function(data) {
       if(data.url){
         window.location = data.url;
       } else if(data.errorMessage){
