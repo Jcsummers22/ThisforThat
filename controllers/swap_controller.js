@@ -1,7 +1,7 @@
 var express = require("express");
-var router = express.Router();
+var router = express.Router;
 
-var app = require("../models/")
+var app = require("../models/product.js")
 
 router.get("/", function(req, res){
     app.all(function(data){
