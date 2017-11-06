@@ -186,8 +186,8 @@
     }
     var currentURL = window.location.origin;
     $.post('/api/newuser', userInput, function(data) {
-      $('#modal1').close('close');
-      window.location.replace("/users/" + data.id);
+      $('#modal1').modal('close');
+      // window.location.replace("/users/" + data.id);
     });
     return false;
   });
