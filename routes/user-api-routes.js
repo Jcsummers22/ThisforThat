@@ -4,6 +4,7 @@
 var db = require("../models");
 
 // Requiring dependencies
+// Node Forge helps with authentication for signing in
 var forge = require('node-forge');
 
 
@@ -25,8 +26,15 @@ module.exports = function(app) {
 	app.post("/api/newuser", function(req, res) {
 		console.log(req.body);
 
+		// variable to hold a hashed version of the new user's password
 		var newPassword = forge.md.sha256.create();
+
+		// passing in the new user's input for password, and then hashing it
 		newPassword.update(req.body.password);
+
+		// .digest().toHex() turns newPassword into a hex code
+		// Below, the hex code will be stored in the password column 
+		// in the database
 		console.log(newPassword.digest().toHex());
 
 		db.User.create({
@@ -47,16 +55,6 @@ module.exports = function(app) {
 	// Signing in an existing user
 	app.post("/api/signin", function(req, res) {
 
-		db.User.findOne({
-			where: {
-				user_id: req.params.id
-			}
-		}).then(function(dbSignIn) {
-			console.log(dbSignIn);
-			res.json(dbSignIn);
-		});
-
-
 		passwordTest = req.body.password;
 
 		var holder = forge.md.sha256.create();
@@ -64,18 +62,31 @@ module.exports = function(app) {
 
 		console.log("Holder: ", holder.digest().toHex());
 
-		console.log("db password:", db.User.password);
+		db.User.findAll({}).then(function(result) {
+			console.log(result);
 
-		console.log("User:", db.User.user_id);
+			for (var i = 0; i < result.length; i++) {
 
-		if (holder.digest().toHex() === db.User.password) {
-			console.log("It Worked.");
-		}
-		else {
-			console.log("It DID NOT work.");
-		}
+				console.log("These are the users in the database: ", result[i]);
+				console.log("This is the password for the user I created: ", result[i].password);
+				console.log("This is the hashed password the user passed in: ", holder.digest().toHex())
+				if (holder.digest().toHex() === result[i].password) {
+					console.log("It Worked.");
 
-	})
+					var fullUrl = req.protocol + '://' + req.get('host');
+
+					console.log(fullUrl + "/userView");
+
+					res.send({redirect: fullUrl + "/userView"});
+				}
+				else {
+					console.log("It DID NOT work.");
+				}
+			}
+
+		});
+
+	});
 
 
 

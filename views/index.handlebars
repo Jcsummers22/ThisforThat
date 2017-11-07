@@ -198,7 +198,7 @@
     }
 
     $.post('/api/signin', userInput, function(data) {
-      
+      window.location = data.redirect;
     });
     return false;
   });
