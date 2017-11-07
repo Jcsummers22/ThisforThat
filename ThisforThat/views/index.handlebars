@@ -1,0 +1,213 @@
+<nav>
+  <div class="nav-wrapper pink-bg">
+    <a id="brandClick" class="brand-logo swap left">ThisforThat</a>
+    <ul id="nav-mobile" class="right">
+    <li><a class="learnMore right">Learn More</a></li>
+    <li><a class="modal-trigger right" href="#modal1">Sign Up</a></li>
+    <li><a class="modal-trigger right" href="#modal2">Login</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<div id="index-banner" class="parallax-container top-image">
+  <div class="container top-text">
+    <h1 class="header white-text swapTitle center">You can get This for That</h1>
+      <div class="row center">
+        <h4 class="header white-text col s12 light">A Perfect Place for Product Love</h4>
+      </div>
+    <div class="row center">
+      <a href="#modal1" id="download-button" class="btn-large waves-effect waves-light lighten-1 modal-trigger">This for That!</a>
+    </div>
+  </div>
+  <div class="parallax"><img src="css/imgs/bg1.jpeg">
+  </div>
+</div>
+
+<div class="section bluebg" id="aboutSwap">
+  <div class="row container">
+    <h1 class="center white-text">Find a New Service</h1>
+      <div class="col s12 m4">
+        <div class="icon-block">
+          <h2 class="center"><i class="material-icons medium pink-text">loyalty</i></h2>
+          <h5 class="center white-text">Post a Product</h5>
+          <p class="center white-text">Post a product in your trade shop that you <br>no longer use or it didn't work out for you.</p>
+        </div>
+      </div>
+
+    <div class="col s12 m4">
+      <div class="icon-block">
+        <h2 class="center"><i class="material-icons medium pink-text">shopping_cart</i></h2>
+        <h5 class="center white-text">Browse Around</h5>
+
+        <p class="center white-text">Look in your friend's trades <br>to find products that you love.</p>
+      </div>
+    </div>
+
+    <div class="col s12 m4">
+      <div class="icon-block">
+         <h2 class="center"><i class="material-icons medium pink-text">ThisforThat</i></h2>
+        <h5 class="center white-text">Make a Trade</h5>
+
+        <p class="center white-text">Ask your friend to make a trade! <br>You can trade for This or you can Trade for That!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="parallax-container">
+ <!--  <div class="container">
+      <h1 class="header center mid-text white-text">Find Your New Love</h1>
+  </div> -->
+  <div class="parallax"><img src="css/imgs/blueBlur.jpg">
+  </div>
+</div>
+
+<!-- Sign Up Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+      <button id="clearSignUp" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
+    <h4>Create your account</h4>
+    <p>You'll be trading in minutes!</p>
+      <form method="POST">
+      <div class="row">
+        <div class="input-field col s12">
+            <input id="user_name" type="text" class="validate">
+            <label for="user_name">Username</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+            <input id="first_name" type="text" class="validate">
+            <label for="first_name">First Name</label>
+        </div>
+        <div class="input-field col s6">
+            <input id="last_name" type="text" class="validate">
+            <label for="last_name">Last Name</label>
+        </div>
+      </div>
+       <div class="row">
+          <div class="input-field col s12">
+            <input id="emailSignUp" type="email" class="validate">
+            <label for="emailSignUp">E-mail</label>
+          </div>
+        </div>
+       <div class="row">
+          <div class="input-field col s12">
+            <input id="zipcode" type="text" class="validate">
+            <label for="zipcode">Zip Code</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="passwordSignUp" type="password" class="validate">
+            <label for="passwordSignUp">Password</label>
+          </div>
+        </div> 
+      </form>
+      <div class="modal-footer">
+        <button class="btn waves-effect waves-light left" type="submit" name="action" id="signUp">Sign Up
+        </button>
+      </div>
+  </div>
+</div>
+
+<!-- Login Modal Structure -->
+<div id="modal2" class="modal">
+  <div class="modal-content">
+      <button id="clearLogin" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
+    <h4>Login to your account</h4>
+    <p>You'll be swapping in minutes!</p>
+      <form action="/login" method="POST">
+       <div class="row">
+          <div class="input-field col s12">
+            <input id="emailLogin" type="email" name="email-for-login" class="validate">
+            <label for="emailLogin">E-mail</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="passwordLogin" type="password" class="validate">
+            <label for="passwordLogin">Password</label>
+          </div>
+        </div> 
+      </form>
+      <div class="modal-footer">
+        <button class="btn waves-effect waves-light left" type="submit" name="action" id="logIn">Login
+        </button>
+      </div>
+  </div>
+</div>
+
+
+
+<footer class="page-footer blue" id="page-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">About This for That</h5>
+        <p class="grey-text text-lighten-4">We wanted to create a one stop shop hub where you can trade goods and service! </p>
+      </div>
+      <div class="col l6 s12 right">
+        <img src="css/imgs/teampic.jpg">
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright pinkT">
+    <div class="container">
+    </div>
+  </div>
+</footer>
+
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.js"></script>
+<script src="js/app.js"></script>
+<script type="text/javascript">
+  $('#clearSignUp').on("click", function() {
+      $("user_name").val("");
+      $('#first_name').val('');
+      $('#last_name').val('');
+      $('#email').val('');
+      $("#zipcode").val("");
+      $('#passwordSignUp').val('');
+  });
+  // $('#clearLogin').on("click", function() {
+  //     $('#email').val('');
+  //     $('#password').val('');
+  // });
+  $('#signUp').on("click", function() {
+    var userInput = {
+      userName: $("#user_name").val().trim(),
+      firstName: $('#first_name').val().trim(),
+      lastName: $('#last_name').val().trim(),
+      email: $('#emailSignUp').val().trim(),
+      zipcode: $("#zipcode").val().trim(),
+      password: $('#passwordSignUp').val().trim(),
+      userImage: "https://www.mautic.org/media/images/default_avatar.png"
+    }
+    var currentURL = window.location.origin;
+    $.post('/api/newuser', userInput, function(data) {
+      $('#modal1').modal('close');
+      // window.location.replace("/users/" + data.id);
+    });
+    return false;
+  });
+  $('#logIn').on("click", function() {
+    var userInput = {
+      email: $('#emailLogin').val().trim(),
+      password: $('#passwordLogin').val().trim()
+    }
+    var currentURL = window.location.origin;
+    $.post('/userView', userInput, function(data) {
+      if(data.url){
+        window.location = data.url;
+      } else if(data.errorMessage){
+        alert(data.errorMessage); 
+      } else {
+        alert("I'm sorry. The website has encountered a server failure.")
+      }
+    });
+    return false;
+  });
+</script>
