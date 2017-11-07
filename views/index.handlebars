@@ -20,7 +20,7 @@
       <a href="#modal1" id="download-button" class="btn-large waves-effect waves-light lighten-1 modal-trigger">This for That!</a>
     </div>
   </div>
-  <div class="parallax"><img src="css/imgs/bg1.jpeg">
+  <div class="parallax"><img src="css/imgs/bg.jpg">
   </div>
 </div>
 
@@ -69,7 +69,13 @@
       <button id="clearSignUp" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
     <h4>Create your account</h4>
     <p>You'll be trading in minutes!</p>
-      <form>
+      <form method="POST">
+      <div class="row">
+        <div class="input-field col s12">
+            <input id="user_name" type="text" class="validate">
+            <label for="user_name">Username</label>
+        </div>
+      </div>
       <div class="row">
         <div class="input-field col s6">
             <input id="first_name" type="text" class="validate">
@@ -79,11 +85,17 @@
             <input id="last_name" type="text" class="validate">
             <label for="last_name">Last Name</label>
         </div>
-       </div>
+      </div>
        <div class="row">
           <div class="input-field col s12">
             <input id="emailSignUp" type="email" class="validate">
             <label for="emailSignUp">E-mail</label>
+          </div>
+        </div>
+       <div class="row">
+          <div class="input-field col s12">
+            <input id="zipcode" type="text" class="validate">
+            <label for="zipcode">Zip Code</label>
           </div>
         </div>
         <div class="row">
@@ -106,7 +118,7 @@
       <button id="clearLogin" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
     <h4>Login to your account</h4>
     <p>You'll be swapping in minutes!</p>
-      <form>
+      <form action="/login" method="POST">
        <div class="row">
           <div class="input-field col s12">
             <input id="emailLogin" type="email" name="email-for-login" class="validate">
@@ -151,10 +163,12 @@
 <script src="js/app.js"></script>
 <script type="text/javascript">
   $('#clearSignUp').on("click", function() {
+      $("user_name").val("");
       $('#first_name').val('');
       $('#last_name').val('');
       $('#email').val('');
-      $('#password').val('');
+      $("#zipcode").val("");
+      $('#passwordSignUp').val('');
   });
   // $('#clearLogin').on("click", function() {
   //     $('#email').val('');
@@ -162,16 +176,18 @@
   // });
   $('#signUp').on("click", function() {
     var userInput = {
+      userName: $("#user_name").val().trim(),
       firstName: $('#first_name').val().trim(),
       lastName: $('#last_name').val().trim(),
       email: $('#emailSignUp').val().trim(),
+      zipcode: $("#zipcode").val().trim(),
       password: $('#passwordSignUp').val().trim(),
       userImage: "https://www.mautic.org/media/images/default_avatar.png"
     }
     var currentURL = window.location.origin;
-    $.post(currentURL + '/api/newuser', userInput, function(data) {
-      $('#modal1').closeModal();
-      window.location.replace("/users/" + data.id);
+    $.post('/api/newuser', userInput, function(data) {
+      $('#modal1').modal('close');
+      // window.location.replace("/users/" + data.id);
     });
     return false;
   });
@@ -181,7 +197,7 @@
       password: $('#passwordLogin').val().trim()
     }
     var currentURL = window.location.origin;
-    $.post(currentURL + '/login', userInput, function(data) {
+    $.post('/userView', userInput, function(data) {
       if(data.url){
         window.location = data.url;
       } else if(data.errorMessage){
