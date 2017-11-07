@@ -4,8 +4,7 @@
 var db = require("../models");
 
 // Requiring dependencies
-var CryptoJS = require("crypto-js");
-var SHA256 = require("crypto-js/sha256");
+var forge = require('node-forge');
 
 
 // The Routes
@@ -26,9 +25,9 @@ module.exports = function(app) {
 	app.post("/api/newuser", function(req, res) {
 		console.log(req.body);
 
-		var hash = SHA256(req.body.password);
-		hash = CryptoJS.enc.Base64.stringify(hash);
-		console.log(hash);
+		var newPassword = forge.md.sha256.create();
+		newPassword.update(req.body.password);
+		console.log(newPassword.digest().toHex());
 
 		db.User.create({
 			userName: 	req.body.userName,
@@ -36,7 +35,7 @@ module.exports = function(app) {
 			lastName: 	req.body.lastName,
 			email: 			req.body.email,
 			zipcode: 		req.body.zipcode,
-			password: 	hash
+			password: 	newPassword.digest().toHex()
 		}).then(function(result) {
 			res.json({ id: result.insertId });
 		}).catch(function(err) {
@@ -48,13 +47,28 @@ module.exports = function(app) {
 	// Signing in an existing user
 	app.post("/api/signin", function(req, res) {
 
-		// Hashing problem here. This rehashes the password.
-		// The new hash will never match the previously hashed password.
-		var hash = SHA256(req.body.password);
-		hash = CryptoJS.enc.Base64.stringify(hash);
-		console.log(hash);
+		db.User.findOne({
+			where: {
+				user_id: req.params.id
+			}
+		}).then(function(dbSignIn) {
+			console.log(dbSignIn);
+			res.json(dbSignIn);
+		});
 
-		if (hash === db.User.password) {
+
+		passwordTest = req.body.password;
+
+		var holder = forge.md.sha256.create();
+		holder.update(passwordTest);
+
+		console.log("Holder: ", holder.digest().toHex());
+
+		console.log("db password:", db.User.password);
+
+		console.log("User:", db.User.user_id);
+
+		if (holder.digest().toHex() === db.User.password) {
 			console.log("It Worked.");
 		}
 		else {
