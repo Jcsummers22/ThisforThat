@@ -23,20 +23,28 @@ module.exports = function(app) {
     });
 	});
 
-  app.get("/api/items", function (req, res) {
+  app.get("/api/items/:items", function (req, res) {
 	  db.Item.findAll({
 		  where:{
-			  item_name: req.body.item_name
+			  item_name: req.params.item_name
 		  }
-	  }).then(function (dbItem) {
-		  res.json(dbItem);
+	  }).then(function (results) {
+		  res.json(results);
 	  });
   });
+
+  app.get("/api/posts", function (req, res) {
+	  var query = {};
+	  if (req.query.item_name) {
+		  query.item_name = req.query.item_name;
+	  
+	};
+  });
 	
-	app.get("/api/category/:category", function (req, res) {
+	app.get("/api/money", function (req, res) {
 		db.Item.findAll({
 			where:{
-				for_cash: true
+				accept_money: true
 			}
 		}).then(function (results) {
 			console.log(results);
@@ -64,29 +72,24 @@ module.exports = function(app) {
 		});
 	});
 
-	app.get("api/buy", function (req, res){
+	app.get("/api/buy", function (req, res){
 		db.Item.findAll({
 			where: {
-				for_cash: true
-			},
-			where: {
-				trade_good: true
-			},
-			where: {
-				trade_service: true
+				
 			}
+			
 		}).then(function(results){
 			res.json(results);
 		});
 	});
 
-	app.get("api/recent", function (req, res){
+	app.get("/api/recent", function (req, res){
 		db.Item.findAll({
 			limit: 5,
 			where:{
 
 			},
-			order: [['created_at', 'DESC']]
+			order: [['item_created', 'DESC']]
 		}).then(function(results){
 			console.log(results)
 			res.json(results);
@@ -94,23 +97,24 @@ module.exports = function(app) {
 	});
 
 
-	app.post("/api/posts", function (req, res) {
+	app.post("/api/newitem", function (req, res) {
 		console.log(req.body);
 		db.Item.create({
 			item_name: req.body.item_name,
 			category: req.body.category,
-			good_or_service: req.body.good_or_service,
-			for_cash: req.body.for_cash,
+			accept_money: req.body.accept_money,
 			trade_good: req.body.trade_good,
-			created_at: req.body.created_at,
-			updated_at: req.body.updated_at
-		
-		}).then(function (dbPost) {
-			res.json({ id: result.insertId });
+			trade_service: req.body.trade_service,
+			item_created: req.body.item_created
+		}).then(function (results) {
+			res.json({ id: results.insertId });
 		}).catch(function (err) {
 		console.log(err);
 	});
 });
+
+	
+
 
 	// DELETE route for deleting posts
 	app.delete("/api/posts/:id", function (req, res) {

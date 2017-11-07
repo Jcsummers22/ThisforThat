@@ -19,14 +19,9 @@ module.exports = function(sequelize, DataTypes) {
     // two options: sale or trade
     // default true = sale
     // false = service
-    good_or_service: {
+    accept_money: {
       type: DataTypes.BOOLEAN
     },
-    // allow the user to provide good/service for money
-    for_cash: {
-      type: DataTypes.BOOLEAN
-    },
-    // allow the user to provide good/service for trade of good
     trade_good: {
       type: DataTypes.BOOLEAN
     },
@@ -34,16 +29,13 @@ module.exports = function(sequelize, DataTypes) {
     trade_service: {
       type: DataTypes.BOOLEAN
     },
+    
+    item_created: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+    },
     buyer_id: {
       type: DataTypes.INTEGER
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      default: 'YYYY-MM-DD HH:mm:SS',
-      allowNull: false
-    },
-    updated_at: {
-      type: DataTypes.DATE,
     }
 
       

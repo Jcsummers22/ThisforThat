@@ -25,4 +25,8 @@ module.exports = function(app) {
 		res.render("manageView");
 	});
 
+	app.get("/functionView", function (req, res) {
+		res.render("functionView");
+	});
+
 };
