@@ -10,6 +10,8 @@ hr {
 
 #maincontainer{
 	margin-top: 50px;
+	color: #0e302b;
+	
 }
 
 nav .nav-wrapper form, nav .nav-wrapper form .input-field{
@@ -50,7 +52,7 @@ footer.page-footer .footer-copyright {
 }
 
 .blue {
-    background-color: #1b998B !important;
+    background-color: #1b998B !important;		
 }
 
 
@@ -152,4 +154,3 @@ a {
 
 .bluebg {
 	background-image: Users/jcsum/ThisforThat/ThisforThat/public/css/bluebg2.jpg
-}
