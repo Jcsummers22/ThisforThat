@@ -7,6 +7,9 @@ var db = require("../models");
 // Requiring dependencies
 var passport = require('passport');
 
+// Require passport strategy
+require("../config/passport/passport.js");
+
 // The Routes
 // ===================
 module.exports = function(app) {
@@ -42,11 +45,10 @@ module.exports = function(app) {
 	// Authenticate user on login
 	app.post('/login', 
 	  passport.authenticate('local', {
-	  	successRedirect: '/userView',
+	  	successRedirect: '/cheese',
 	  	failureRedirect: '/', 
 	  	failureFlash: true
-	  }));
-	
+		}));
 
 
 

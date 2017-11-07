@@ -197,7 +197,7 @@
       password: $('#passwordLogin').val().trim()
     }
     var currentURL = window.location.origin;
-    $.post(currentURL + '/userView', userInput, function(data) {
+    $.post('/userView', userInput, function(data) {
       if(data.url){
         window.location = data.url;
       } else if(data.errorMessage){

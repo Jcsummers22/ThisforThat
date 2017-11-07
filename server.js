@@ -32,14 +32,17 @@ app.use(methodOverride('_method'));
 app.use(session({ 
   cookie: { maxAge: 60000 }, 
   secret: 'woot',
-  resave: false, 
-  saveUninitialized: false
+  resave: true, 
+  saveUninitialized: true
 }));
 
 // use passport authentication
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+// load passport strategy
+require("./config/passport/passport.js")(passport);
 
 
 
@@ -55,22 +58,6 @@ require("./routes/item-api-routes.js")(app);
 require("./routes/user-api-routes.js")(app);
 require("./routes/html-routes.js")(app);
 
-// Not sure what part of MVC to put this block of code in
-passport.use(new LocalStrategy(
-  function(email, password, done) {
-    User.findOne({ email: email }, function(err, user) {
-      console.log("within local strategy", user);
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect email.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
 
 // Starts our Express server
 db.sequelize.sync({ force: true }).then(function() {
