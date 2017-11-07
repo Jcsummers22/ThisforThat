@@ -3,10 +3,7 @@ var express = require('express');
 var methodOverride = require('method-override'); 
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var flash = require('connect-flash');
-var session = require('express-session');
+
 
 // Set up Express App
 var app = express(); 
@@ -27,24 +24,6 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 //override with POST command
 app.use(methodOverride('_method')); 
-
-// setting up a session to use along with passport authentication
-app.use(session({ 
-  cookie: { maxAge: 60000 }, 
-  secret: 'woot',
-  resave: true, 
-  saveUninitialized: true
-}));
-
-// use passport authentication
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash());
-
-// load passport strategy
-require("./config/passport/passport.js")(passport);
-
-
 
 // Sets Handlebars as the default templating engine.
 app.engine('handlebars', exphbs({

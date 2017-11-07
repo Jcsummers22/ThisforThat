@@ -1,14 +1,12 @@
 // This file provides routes for adding users to the database
 
-
 // Requiring the models
 var db = require("../models");
 
 // Requiring dependencies
-var passport = require('passport');
+var CryptoJS = require("crypto-js");
+var SHA256 = require("crypto-js/sha256");
 
-// Require passport strategy
-require("../config/passport/passport.js");
 
 // The Routes
 // ===================
@@ -27,13 +25,18 @@ module.exports = function(app) {
 	// Add (Post) new user to the database
 	app.post("/api/newuser", function(req, res) {
 		console.log(req.body);
+
+		var hash = SHA256(req.body.password);
+		hash = CryptoJS.enc.Base64.stringify(hash);
+		console.log(hash);
+
 		db.User.create({
 			userName: 	req.body.userName,
 			firstName: 	req.body.firstName,
 			lastName: 	req.body.lastName,
 			email: 			req.body.email,
 			zipcode: 		req.body.zipcode,
-			password: 	req.body.password
+			password: 	hash
 		}).then(function(result) {
 			res.json({ id: result.insertId });
 		}).catch(function(err) {
@@ -42,13 +45,24 @@ module.exports = function(app) {
 
 	});
 
-	// Authenticate user on login
-	app.post('/login', 
-	  passport.authenticate('local', {
-	  	successRedirect: '/cheese',
-	  	failureRedirect: '/', 
-	  	failureFlash: true
-		}));
+	// Signing in an existing user
+	app.post("/api/signin", function(req, res) {
+
+		// Hashing problem here. This rehashes the password.
+		// The new hash will never match the previously hashed password.
+		var hash = SHA256(req.body.password);
+		hash = CryptoJS.enc.Base64.stringify(hash);
+		console.log(hash);
+
+		if (hash === db.User.password) {
+			console.log("It Worked.");
+		}
+		else {
+			console.log("It DID NOT work.");
+		}
+
+	})
+
 
 
 

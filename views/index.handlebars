@@ -118,7 +118,7 @@
       <button id="clearLogin" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
     <h4>Login to your account</h4>
     <p>You'll be swapping in minutes!</p>
-      <form action="/login" method="POST">
+      <form action="/api/signin" method="POST">
        <div class="row">
           <div class="input-field col s12">
             <input id="emailLogin" type="email" name="email-for-login" class="validate">
@@ -162,6 +162,7 @@
 <script type="text/javascript" src="js/materialize.js"></script>
 <script src="js/app.js"></script>
 <script type="text/javascript">
+  window.open('https://github.com/login/oauth/authorize?client_id=your-client-id');
   $('#clearSignUp').on("click", function() {
       $("user_name").val("");
       $('#first_name').val('');
@@ -196,15 +197,9 @@
       email: $('#emailLogin').val().trim(),
       password: $('#passwordLogin').val().trim()
     }
-    var currentURL = window.location.origin;
-    $.post('/userView', userInput, function(data) {
-      if(data.url){
-        window.location = data.url;
-      } else if(data.errorMessage){
-        alert(data.errorMessage); 
-      } else {
-        alert("I'm sorry. The website has encountered a server failure.")
-      }
+
+    $.post('/api/signin', userInput, function(data) {
+      
     });
     return false;
   });
