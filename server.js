@@ -4,7 +4,7 @@ var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+//var LocalStrategy = require('passport-local').Strategy;
 var flash = require('connect-flash');
 var session = require('express-session');
 
@@ -13,7 +13,7 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 
 
-//static content
+//static contentn
 app.use(express.static('./public'));
 
 // require everything in the models folder
