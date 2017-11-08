@@ -68,16 +68,25 @@ module.exports = function(app) {
 			for (var i = 0; i < result.length; i++) {
 
 				console.log("These are the users in the database: ", result[i]);
-				console.log("This is the password for the user I created: ", result[i].password);
-				console.log("This is the hashed password the user passed in: ", holder.digest().toHex())
-				if (holder.digest().toHex() === result[i].password) {
+				console.log("This is the password for the user previously created: ", result[i].password);
+				console.log("This is the hashed password the current user passed in: ", holder.digest().toHex())
+
+				console.log("Email of previously created user: ", result[i].email);
+				console.log("Email passed in by current user: ", req.body.email);
+				
+				if (holder.digest().toHex() === result[i].password && req.body.email === result[i].email) {
 					console.log("It Worked.");
 
+					// pulls in http://host. 
+					// On localhost:3000 it becomes http://localhost:3000
 					var fullUrl = req.protocol + '://' + req.get('host');
 
-					console.log(fullUrl + "/userView");
+					// Test. On localhost:3000, it should show
+					// http://localhost:3000/manageView
+					console.log(fullUrl + "/manageView");
 
-					res.send({redirect: fullUrl + "/userView"});
+					// Redirect to new page
+					res.send({redirect: fullUrl + "/manageView"});
 				}
 				else {
 					console.log("It DID NOT work.");
