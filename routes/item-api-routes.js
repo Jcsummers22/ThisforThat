@@ -17,17 +17,30 @@ module.exports = function(app) {
 	//});
 
 	// Show us (Get) everything in table items when this route is accessed
+
+	app.get("/", function (req, res) {
+		db.Item.selectAll(function (data) {
+			// handlebars will only accept objects,
+			// so an object must be passed here to make this work
+			var handlebarsObject = {
+				item_name: data
+			};
+
+			// to make the result appear on the index.handlebars page
+			res.render("userView", handlebarsObject);
+		});
+	});
+
+
   app.get("/api/all", function(req, res) {
     db.Item.findAll({}).then(function(dbItem) {
       res.json(dbItem);
     });
 	});
 
-  app.get("/api/items/:items", function (req, res) {
+  app.get("/api/items", function (req, res) {
 	  db.Item.findAll({
-		  where:{
-			  item_name: req.params.item_name
-		  }
+		  item_name: req.body.item_name	  
 	  }).then(function (results) {
 		  res.json(results);
 	  });
