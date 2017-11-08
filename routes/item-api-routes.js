@@ -18,8 +18,8 @@ module.exports = function(app) {
 
 	// Show us (Get) everything in table items when this route is accessed
 
-	app.get("/", function (req, res) {
-		db.Item.selectAll(function (data) {
+	app.get("/api/itemSearch", function (req, res) {
+		db.Item.findAll(function (data) {
 			// handlebars will only accept objects,
 			// so an object must be passed here to make this work
 			var handlebarsObject = {
