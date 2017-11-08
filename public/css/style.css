@@ -23,6 +23,7 @@ nav .brand-logo {
   padding-left: 40px;
 }
 
+
 nav {
 	background-color: #1b998B;
 }
@@ -91,15 +92,41 @@ footer.page-footer .footer-copyright {
 .swap {
 	font-family: 'Covered By Your Grace', cursive;
 }
+.textField {
+	font-family: 'Covered By Your Grace', cursive;
+	font-size: 18px;
+	color:teal;
+}
+.aboutSwap {
+	background-image:"css/imgs/bg1.jpeg";
+}
 
+.front1 {
+	font-size: 30px;
+}
+#front {
+	font-family: 'Covered By Your Grace', cursive;
+}
 .swapTitle {
 	font-family: 'Covered By Your Grace', cursive;
 	font-size: 6.2rem;
 }
-
+.trade {
+	font-family: 'Covered By Your Grace', cursive;
+	font-size: 12px;
+}
+.tradeText {
+	font-family: 'Covered By Your Grace', cursive;
+	font-size: 15px;
+}
+#front2 {
+	font-family: 'Covered By Your Grace', cursive;
+	font-size: 20px;
+}
 #aboutSwap {
 	padding-top: 3rem;
 	padding-bottom: 3rem;
+	background-image: "css/imgs/bg1.jpeg";	
 }
 
 #brandClick {
@@ -153,5 +180,5 @@ a {
 }
 
 .bluebg {
-	background-image: Users/jcsum/ThisforThat/ThisforThat/public/css/bluebg2.jpg
+	background-image: "css/imgs/bg1.jpeg";
 }
