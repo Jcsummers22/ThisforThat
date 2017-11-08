@@ -18,32 +18,35 @@ module.exports = function(app) {
 
 	// Show us (Get) everything in table items when this route is accessed
 
-	app.get("/api/itemSearch", function (req, res) {
-		db.Item.findAll(function (data) {
-			// handlebars will only accept objects,
-			// so an object must be passed here to make this work
-			var handlebarsObject = {
-				item_name: data
-			};
 
-			// to make the result appear on the index.handlebars page
-			res.render("userView", handlebarsObject);
+
+
+	
+
+
+
+
+	app.get("/api/all", function (req, res) {
+		db.Item.findAll({}).then(function (dbItem) {
+			res.json(dbItem);
 		});
 	});
 
-
-  app.get("/api/all", function(req, res) {
-    db.Item.findAll({}).then(function(dbItem) {
-      res.json(dbItem);
-    });
-	});
-
-  app.get("/api/items", function (req, res) {
+  app.get("/api/itemSearch", function (req, res) {
 	  db.Item.findAll({
 		  item_name: req.body.item_name	  
-	  }).then(function (results) {
-		  res.json(results);
-	  });
+	  }).then(function (data) {
+		 // console.log("Data: ", data);
+		 // for(var i = 0; i < data.length; i++){
+		  res.render("userView", data)
+		//  }
+		 // res.json(results);
+		//  console.log(results);
+	//	for(i = 0; i < results.length; i++){
+		//	console.log(results[i].item_name);
+		//	res.render(results[i].item_name, "userView")
+	//	}
+		  });
   });
 
   app.get("/api/posts", function (req, res) {

@@ -36,9 +36,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     buyer_id: {
       type: DataTypes.INTEGER
-    }
-
-      
+    }      
   });
 
   Item.associate = function(models) {

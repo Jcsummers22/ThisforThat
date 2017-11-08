@@ -3,15 +3,7 @@
 <a class="brand-logo swap left">ThisforThat</a>
 <ul id="nav-mobile" class="right">
     <li class="search">
-      <div class="nav-wrapper">
-            <form method="GET">
-              <div class="input-field">
-                <input name="item_name" id="search_item" type="search" placeholder="search item!"required>
-                <button type="submit">search</button>
-                
-              </div>
-            </form>
-          </div>
+   
     <li><a id="logout" href="#">Logout</a></li>
     </li>
 </ul>
@@ -23,23 +15,15 @@
 <div class="row">
 
 
+<div class="row">
+  <form method="GET">
+    <div class="input-field">
+      <input name="item_name" id="search_item" for="search_item" type="search" placeholder="search item!" required>
+      <button id="submit" type="submit">search</button>
 
-
-
-
-<div class="col-md" id="search_item">
-  <!-- Pass in data from server.js -->
-  <ul class="list-group">
-    {{#each items}} 
-    <span class="label" id={{this.id}}>{{this.id}}.  {{this.item_name}}</span>
-    
-    <!--{{#unless devoured}} {{> burgers/burgerNotDevoured-block}} {{/unless}} -->
-    {{/each}}
-  </ul>
-</div>
-
-
-
+    </div>
+  </form>
+  <div id="div1"></div>
 
 
   
@@ -79,26 +63,27 @@
 $(document).ready(function(){
 
 
-  $("#search_input").on("submit", function (event) {
+  $("#submit").on("click", function (event) {
     event.preventDefault();
-
+  itemResults = [];
     var item_search = {
       item_name: $("#search_item").val().trim()
     };
 
     $.ajax("/api/itemSearch", {
       type: "GET",
-      data: item_search
-    }).then(
-      function () {
-        // This console.log shows up in the browser's console for
-        // a split second. Because of location.reload(), the 
-        // logged message disappears instantly
-        console.log("Created a new burger.");
-        // Reload the page to get the updated list
-        location.reload();
+      dataType: 'json',
+      data: item_search,
+      success: function (result) {
+          $("#div1").html(result);
+      
+   
       }
-      );
+
+    }).done(function () {
+    console.log("item posted");
+      
+    });
   });
 
 
