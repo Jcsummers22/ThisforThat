@@ -18,35 +18,37 @@ module.exports = function(app) {
 
 	// Show us (Get) everything in table items when this route is accessed
 
-
-
-
-	
-
-
-
-
-	app.get("/api/all", function (req, res) {
-		db.Item.findAll({}).then(function (dbItem) {
-			res.json(dbItem);
+	app.get("/api/itemSearch", function (req, res) {
+		var handlebarsObject;
+		db.Item.findAll(
+			handlebarsObject = {  
+			item_name: req.body.item_name
+			
+		}).then(function (data) {
+			console.log(handlebarsObject);
+			res.render("userView", handlebarsObject);
 		});
 	});
 
-  app.get("/api/itemSearch", function (req, res) {
+
+	app.get("/api/items", function (req, res) {
+		db.Item.findAll({
+			item_name: req.body.item_name,
+
+		}).then(function (data) {
+			res.json(data)
+			for (i = 0; i < data.length; i++) {
+				console.log(data[i].item_name);
+			}
+		});
+	});
+
+  app.get("/api/items", function (req, res) {
 	  db.Item.findAll({
 		  item_name: req.body.item_name	  
-	  }).then(function (data) {
-		 // console.log("Data: ", data);
-		 // for(var i = 0; i < data.length; i++){
-		  res.render("userView", data)
-		//  }
-		 // res.json(results);
-		//  console.log(results);
-	//	for(i = 0; i < results.length; i++){
-		//	console.log(results[i].item_name);
-		//	res.render(results[i].item_name, "userView")
-	//	}
-		  });
+	  }).then(function (results) {
+		  res.json(results);
+	  });
   });
 
   app.get("/api/posts", function (req, res) {

@@ -15,16 +15,17 @@
 <div class="row">
 
 
-<div class="row">
-  <form method="GET">
-    <div class="input-field">
-      <input name="item_name" id="search_item" for="search_item" type="search" placeholder="search item!" required>
-      <button id="submit" type="submit">search</button>
 
-    </div>
-  </form>
-  <div id="div1"></div>
+<div class="input-field col s12">
 
+					<div class="panel-heading">
+						<h3 class="panel-title"><strong>Current Items</strong></h3>
+					</div>
+					<div class="panel-body" id="well-section">
+				
+					<!-- Content will go in here -->
+					</div>
+				</div>
 
   
    
@@ -62,127 +63,44 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
+ //$("#btn_takeQuiz").on("click", function (event) {
+   // event.preventDefault();
 
-  $("#submit").on("click", function (event) {
-    event.preventDefault();
-  itemResults = [];
-    var item_search = {
-      item_name: $("#search_item").val().trim()
-    };
+   // alert("take quiz");
 
-    $.ajax("/api/itemSearch", {
-      type: "GET",
-      dataType: 'json',
-      data: item_search,
-      success: function (result) {
-          $("#div1").html(result);
-      
+   // var quizData = {
+     // quizId: $("#quizId").val()
+  //  };
+
+   // var item_search = {
+   //     item_name: $("#search_item").val().trim()
+   //   };
+
+    // Send the GET request.
+   // $.ajax("/quiz/", {
+   //   type: "GET",
+  //    data: quizData
+ //   });
+ // });
+
+
+
+  
+  $.get("/api/items", function (data) {
+  
+    for (var i = 0; i < data.length; i++) {
+
+      var wellSection = $("<div>");
+
+      wellSection.addClass("well");
+    
+      wellSection.attr("id", "item-well-" + i);
    
-      }
-
-    }).done(function () {
-    console.log("item posted");
-      
-    });
+      $("#well-section").append(wellSection);
+      $("#item-well-" + i).append("<p>" + data[i].item_name + "</p>");
+      $("#item-well-" + i).append("<p>Category: " + data[i].category + "</p>");
+      $("#item-well-" + i).append("<p>Item posted on: " + data[i].item_created + "</p>");
+    }
   });
-
-
-
-  /*var $search_container = $("#search_container")
-
-    var items = [];
-
-    getItems();
-
-  function initializeRows(){
-    $search_container.empty();
-    var rowsToAdd = [];
-    for (var i = 0; i < items.length; i++){
-      rowsToAdd.push(createNewRow(items[i]))
-    }
-    $search_container.prepend(rowsToAdd);
-  }
-
-  function getItems(){
-    $.get("/api/items", function(data){
-      items = data;
-      initializeRows();
-    });
-  }
-
-  function createNewRow(item) {
-      var $newInputRow = $(
-        [
-          "<li class='list-group-item todo-item'>",
-          "<span>",
-          item.text,
-          "</span>",
-          "<input type='text' class='edit' style='display: none;'>",
-          "</li>"
-        ].join("")
-      );
-      $newInputRow.find("input.edit").css("display", "none");
-      $newInputRow.data("todo", todo);
-      return $newInputRow;
-    }
-
-
-    var url = window.location.search;
-    var itemId;
-    if (url.indexOf("?item_name=") !== -1) {
-      itemId = url.split("=")[1];
-      getItems(itemId);
-    }
-    // If there's no authorId we just get all posts as usual
-    else {
-      getItems();
-    }
-
-    function getitems(item) {
-    itemId = item || "";
-    if (itemId) {
-      itemId = "/?item_name=" + itemId
-    }
-    $.get("/api/items" + itemId, function (data) {
-      console.log("items", data);
-      items = data;
-      if (!items || !items.length) {
-        displayEmpty(items);
-      }
-      else {
-        initializeRows();
-      }
-    });
-  }
-
-
-  $("#logout").click(function(event){
-      event.preventDefault();
-     
-      var currentURL = window.location.origin;
-      $.get(currentURL + "/logout").then(function(){
-        window.location = "/";
-      });
-  });
-
-  $("#search").on("click", function(event){
-    event.preventDefault();
-    var userSearch = {
-      item_name: $('#item_name').val().trim(),
-    }
-  $.ajax("/api/items", {
-      method: "GET",
-      data: userSearch, dataType: "json"
-    }).done(
-      function () {
-        console.log("created new item");
-        // Reload the page to get the updated list
-        location.reload();
-
-  });
-
-
-
-}); */
 });
 </script>

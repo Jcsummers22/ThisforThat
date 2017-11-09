@@ -1,7 +1,7 @@
 // creating User model
 // Exporting makes the User Model available for other files.
 // This will also create a table when server.js is run.
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   var User = sequelize.define("User", {
     user_id: {
       type: DataTypes.INTEGER,
@@ -34,8 +34,8 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     }
   }, {
-    timestamps: false
-  });
+      timestamps: false
+    });
 
   return User;
 }

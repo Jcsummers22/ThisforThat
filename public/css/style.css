@@ -1,24 +1,26 @@
-body {
+	body {
 	font-family: 'Abel', sans-serif;
 }
 
 hr {
-   border: 0;
-   height: 1px;
-   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+	border: 0;
+	height: 1px;
+	background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
-#maincontainer{
+#maincontainer {
 	margin-top: 50px;
+	color: #0e302b;
 }
 
-nav .nav-wrapper form, nav .nav-wrapper form .input-field{
+nav .nav-wrapper form,
+nav .nav-wrapper form .input-field {
 	height: 64px !important;
 }
 
 nav .brand-logo {
-  color: white;
-  padding-left: 40px;
+	color: white;
+	padding-left: 40px;
 }
 
 nav {
@@ -30,6 +32,7 @@ nav {
 	padding-right: 40px;
 }
 */
+
 .header {
 	padding-top: 40px;
 }
@@ -37,12 +40,13 @@ nav {
 footer.page-footer {
 	margin-top: 0px;
 }
+
 .btn-large {
 	background-color: #E84855;
 }
 
 .btn-large:hover {
-    background-color: #2D3047;
+	background-color: #2D3047;
 }
 
 footer.page-footer .footer-copyright {
@@ -50,23 +54,22 @@ footer.page-footer .footer-copyright {
 }
 
 .blue {
-    background-color: #1b998B !important;
+	background-color: #1b998B !important;
 }
 
-
 .darkblue {
-    background-color: #2D3047 !important;
+	background-color: #2D3047 !important;
 }
 
 .pink-bg {
-    background-color: #E84855 !important;
+	background-color: #E84855 !important;
 }
 
 .pink-text {
-    color: #E84855 !important;
+	color: #E84855 !important;
 }
 
-.blueIcon{
+.blueIcon {
 	color: #1b998B !important;
 }
 
@@ -82,9 +85,9 @@ footer.page-footer .footer-copyright {
 	padding-top: 200px;
 }
 
-.modal { 
-	width: 40% !important  
-} 
+.modal {
+	width: 40% !important
+}
 
 .swap {
 	font-family: 'Covered By Your Grace', cursive;
@@ -104,13 +107,13 @@ footer.page-footer .footer-copyright {
 	cursor: pointer;
 }
 
-#postAProduct { 
-	width: 60% !important  
+#postAProduct {
+	width: 60% !important
 }
 
-#updateProduct { 
-	width: 60% !important  
-} 
+#updateProduct {
+	width: 60% !important
+}
 
 .swapArrow {
 	padding-top: 50px;
@@ -126,10 +129,10 @@ blockquote {
 }
 
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-floating) {
-    color: #E84855;
-    margin-right: 20px;
-    transition: color .3s ease;
-    text-transform: none;
+	color: #E84855;
+	margin-right: 20px;
+	transition: color .3s ease;
+	text-transform: none;
 }
 
 a:hover {
@@ -142,14 +145,13 @@ ul li {
 }
 
 li:hover {
-    background-color: #2D3047;
-    text-align: center;
+	background-color: #2D3047;
+	text-align: center;
 }
 
 a {
-	color:#1b998B;
+	color: #1b998B;
 }
 
 .bluebg {
 	background-image: Users/jcsum/ThisforThat/ThisforThat/public/css/bluebg2.jpg
-}
